@@ -2,13 +2,109 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Blog | Md. Your Name</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Rafiqul Islam</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+
+    header {
+      background: #2c3e50;
+      color: #fff;
+      padding: 30px 20px;
+      text-align: center;
+    }
+
+    nav {
+      background: #eee;
+      text-align: center;
+      padding: 10px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: #2c3e50;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .content {
+      flex: 3;
+      padding-right: 30px;
+    }
+
+    .sidebar {
+      flex: 1;
+      min-width: 200px;
+      background: #fff;
+      padding: 20px;
+      border-left: 1px solid #ddd;
+    }
+
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 10px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      padding: 8px 0;
+    }
+
+    a {
+      color: #007acc;
+      text-decoration: none;
+    }
+
+    .category-link {
+      cursor: pointer;
+      color: #2c3e50;
+      font-weight: bold;
+    }
+
+    .category-link:hover {
+      color: #007acc;
+    }
+
+    .post-list {
+      display: none;
+    }
+
+    .post-list.active {
+      display: block;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      font-size: 0.9rem;
+    }
+  </style>
 </head>
 <body>
+
   <header>
-    <h1>My Blog</h1>
-    <p>Java | Spring Boot | Cloud | Architecture</p>
+    <h1>Rafiqul Islam's Blog</h1>
+    <p>Senior Java Developer | Backend Engineering | Cloud Native</p>
   </header>
 
   <nav>
@@ -19,25 +115,67 @@
   </nav>
 
   <main>
-    <h2>Latest Posts</h2>
-    <ul>
-      <li>
-        <a href="blog/spring-boot-monitoring.html">🔍 Monitoring Spring Boot with Prometheus & Grafana</a><br>
-        <small>Learn how to add metrics and dashboards to your Spring Boot applications.</small>
-      </li>
-      <li>
-        <a href="blog/kafka-vs-rabbitmq.html">📨 Apache Kafka vs RabbitMQ – When to Use What</a><br>
-        <small>A developer’s guide to choosing the right messaging system for your microservices.</small>
-      </li>
-      <li>
-        <a href="blog/graphql-rest-comparison.html">🔗 GraphQL vs REST – Backend Engineer’s Perspective</a><br>
-        <small>Compare the two most popular API styles with real-world use cases.</small>
-      </li>
-    </ul>
+    <div class="content">
+      <h2>Blog Posts</h2>
+
+      <div id="springboot" class="post-list">
+        <ul>
+          <li><a href="blog/spring-boot-monitoring.html">🔍 Monitoring Spring Boot with Prometheus & Grafana</a></li>
+        </ul>
+      </div>
+
+      <div id="kafka" class="post-list">
+        <ul>
+          <li><a href="blog/kafka-vs-rabbitmq.html">📨 Apache Kafka vs RabbitMQ – When to Use What</a></li>
+        </ul>
+      </div>
+
+      <div id="graphql" class="post-list">
+        <ul>
+          <li><a href="blog/graphql-rest-comparison.html">🔗 GraphQL vs REST – Backend Engineer’s Perspective</a></li>
+        </ul>
+      </div>
+
+      <div id="aws" class="post-list">
+        <ul>
+          <li><a href="#">🚀 Deploying Java Microservices on AWS using Lambda & CloudSearch</a></li>
+        </ul>
+      </div>
+       <div id="git" class="post-list">
+        <ul>
+          <li><a href="blog/git-basic.html">🔗 Git basic</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li class="category-link" onclick="showPosts('springboot')">Spring Boot</li>
+        <li class="category-link" onclick="showPosts('kafka')">Kafka & Messaging</li>
+        <li class="category-link" onclick="showPosts('graphql')">GraphQL & REST</li>
+        <li class="category-link" onclick="showPosts('aws')">AWS & Cloud</li>
+         <li class="category-link" onclick="showPosts('git')">Git basic</li>
+      </ul>
+    </aside>
   </main>
 
   <footer>
-    &copy; 2025 Md. Your Name | Blog
+    &copy; 2025 Rafiqul Islam | Powered by GitHub Pages
   </footer>
+
+  <script>
+    function showPosts(categoryId) {
+      document.querySelectorAll('.post-list').forEach(div => {
+        div.classList.remove('active');
+      });
+      document.getElementById(categoryId).classList.add('active');
+    }
+
+    // Optional: show first category by default
+    window.onload = () => {
+      showPosts('springboot');
+    };
+  </script>
 </body>
 </html>
