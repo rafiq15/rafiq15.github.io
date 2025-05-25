@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Monitoring Spring Boot with Prometheus & Grafana</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <h1>Monitoring Spring Boot with Prometheus & Grafana</h1>
+    <p><em>Published: May 2025</em></p>
+  </header>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../blog.html">Blog</a>
+  </nav>
+
+  <main>
+    <p>In a distributed system, monitoring is essential. This post shows how to expose metrics from a Spring Boot application and visualize them with Grafana.</p>
+
+    <h2>Setup</h2>
+    <ul>
+      <li>Spring Boot Actuator</li>
+      <li>Prometheus</li>
+      <li>Grafana</li>
+    </ul>
+
+    <h2>Configuration</h2>
+    <pre><code>management.endpoints.web.exposure.include=prometheus
+management.endpoint.prometheus.enabled=true</code></pre>
+
+    <p>Use Prometheus to scrape metrics from <code>/actuator/prometheus</code>. Grafana will read from Prometheus and render dashboards.</p>
+  </main>
+
+  <footer>
+    &copy; 2025 Md. Your Name
+  </footer>
+</body>
+</html>
