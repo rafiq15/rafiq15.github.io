@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8" />
-    <title>Git Basic</title>
-    <link rel="stylesheet" href="../style.css" />
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <title>Git Basic</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
 
-  <body>
-    <header>
-      <h1>Git Basic Commands Every Developer Should Know</h1>
-      <p><em>Published: May 2025</em></p>
-    </header>
+<body>
+  <header>
+    <h1>Git Basic Commands Every Developer Should Know</h1>
+    <p><em>Published: May 2025</em></p>
+  </header>
 
-    <nav>
-      <a href="../index.html">Home</a>
-      <a href="../blog.html">Blog</a>
-    </nav>
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
 
-    <main>
-      <p>Version control is an essential part of modern software development,
-        and Git is the most widely used version
-        control system. Here’s a list of basic Git commands that every developer
-        should know when starting with Git.</p>
+  <main>
+    <p>Version control is an essential part of modern software development,
+      and Git is the most widely used version
+      control system. Here’s a list of basic Git commands that every developer
+      should know when starting with Git.</p>
 
-      <h2>1. Git Configuration</h2>
-      <pre><code>git config --global user.name "Your Name"
+    <h2>1. Git Configuration</h2>
+    <pre><code>git config --global user.name "Your Name"
 git config --global user.email "you@example.com"</code></pre>
 
-      <h2>2. Initialize a Repository</h2>
-      <pre><code>git init</code></pre>
+    <h2>2. Initialize a Repository</h2>
+    <pre><code>git init</code></pre>
 
-      <h2>3. Clone a Repository</h2>
-      <pre><code>git clone https://github.com/username/repository.git</code></pre>
+    <h2>3. Clone a Repository</h2>
+    <pre><code>git clone https://github.com/username/repository.git</code></pre>
 
-      <h2>4. Check Status</h2>
-      <pre><code>git status</code></pre>
+    <h2>4. Check Status</h2>
+    <pre><code>git status</code></pre>
 
-      <h2>5. Stage Changes</h2>
-      <pre>
+    <h2>5. Stage Changes</h2>
+    <pre>
       <code>
         git add filename  # Stage a specific file
         git add .      # Stage all changes in the current directory
@@ -48,26 +50,26 @@ git config --global user.email "you@example.com"</code></pre>
       </code>
     </pre>
 
-      <h2>6. Commit Changes</h2>
-      <pre><code>git commit -m "Your commit message"</code></pre>
+    <h2>6. Commit Changes</h2>
+    <pre><code>git commit -m "Your commit message"</code></pre>
 
-      <H2>
-        7.Recover erased data of a file or Recover deleted file </H2>
-        <pre><code>
+    <H2>
+      7.Recover erased data of a file or Recover deleted file </H2>
+    <pre><code>
           git checkout filename  # Discard changes in a file
           git checkout -f  # Restore deleted files after commit
         </code></pre>
-      </H2>
-      <h2>8. View Commit History</h2>
-      <pre><code>
+    </H2>
+    <h2>8. View Commit History</h2>
+    <pre><code>
         git log  # Shows the full commit history of the current branch.
         git log -p  # Show changes in each commit. Shows the diffs introduced by each commit.
         git log --oneline  # Show a simplified commit history with one line per commit.
         git show 9a0f1fc # Show details of a specific commit.
       </code></pre>
 
-      <h2>9. View Differences</h2>
-      <pre><code>
+    <h2>9. View Differences</h2>
+    <pre><code>
         git diff  # Show unstaged changes in the working directory.
         git diff --staged  # Show staged changes that are ready to be committed.
         git diff HEAD  # Show all changes since the last commit.
@@ -75,8 +77,8 @@ git config --global user.email "you@example.com"</code></pre>
         git diff commit1..commit2  # Show differences between two commits.
       </code></pre>
 
-      <h2>10. .gitignore</h2>
-      <pre><code>
+    <h2>10. .gitignore</h2>
+    <pre><code>
         A .gitignore file tells Git which files or folders to ignore so they don’t get tracked, committed, or pushed to a repository.
         <strong>Syntax & Examples:</strong>
         Place a .gitignore file in your project root. Example:
@@ -95,42 +97,42 @@ git config --global user.email "you@example.com"</code></pre>
         target/
         build/
        </code></pre>
-       
-      <h2>11. Create and Switch Branch</h2>
-      <pre><code>git checkout -b new-branch</code></pre>
 
-      <h2>12. Merge Branch</h2>
-      <pre><code>git checkout main
+    <h2>11. Create and Switch Branch</h2>
+    <pre><code>git checkout -b new-branch</code></pre>
+
+    <h2>12. Merge Branch</h2>
+    <pre><code>git checkout main
 git merge new-branch</code></pre>
 
-      <h2>13. Push to Remote</h2>
-      <pre><code>git push origin main</code></pre>
+    <h2>13. Push to Remote</h2>
+    <pre><code>git push origin main</code></pre>
 
-      <h2>14. Pull from Remote</h2>
-      <pre><code>git pull origin main</code></pre>
+    <h2>14. Pull from Remote</h2>
+    <pre><code>git pull origin main</code></pre>
 
-      <h2>15. Discard Changes</h2>
-      <pre><code>git checkout -- filename</code></pre>
+    <h2>15. Discard Changes</h2>
+    <pre><code>git checkout -- filename</code></pre>
 
-      <h2>16. Unstage a File</h2>
-      <pre><code>git reset filename</code></pre>
+    <h2>16. Unstage a File</h2>
+    <pre><code>git reset filename</code></pre>
 
-      <h2>17. Delete a Branch</h2>
-      <pre><code>git branch -d branch-name</code></pre>
+    <h2>17. Delete a Branch</h2>
+    <pre><code>git branch -d branch-name</code></pre>
 
-      <p><strong>Conclusion:</strong> These commands cover the most essential
-        Git operations you'll use frequently. Master
-        these first, then move on to advanced topics like <code>rebase</code>,
-        <code>stash</code>, and
-        <code>cherry-pick</code>.
-      </p>
-      <p>✅ <em>Stay consistent with commits and always write meaningful
-          messages!</em></p>
-    </main>
+    <p><strong>Conclusion:</strong> These commands cover the most essential
+      Git operations you'll use frequently. Master
+      these first, then move on to advanced topics like <code>rebase</code>,
+      <code>stash</code>, and
+      <code>cherry-pick</code>.
+    </p>
+    <p>✅ <em>Stay consistent with commits and always write meaningful
+        messages!</em></p>
+  </main>
 
-    <footer>
-      &copy; 2025 Md. Your Name
-    </footer>
-  </body>
+  <footer>
+    &copy; 2025 Md. Your Name
+  </footer>
+</body>
 
 </html>
