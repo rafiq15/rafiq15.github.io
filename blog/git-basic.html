@@ -3,7 +3,7 @@
 
   <head>
     <meta charset="UTF-8" />
-    <title>GraphQL vs REST</title>
+    <title>Git Basic</title>
     <link rel="stylesheet" href="../style.css" />
   </head>
 
@@ -65,6 +65,36 @@ git config --global user.email "you@example.com"</code></pre>
         git show 9a0f1fc # Show details of a specific commit.
       </code></pre>
 
+      <h2>9. View Differences</h2>
+      <pre><code>
+        git diff  # Show unstaged changes in the working directory.
+        git diff --staged  # Show staged changes that are ready to be committed.
+        git diff HEAD  # Show all changes since the last commit.
+        git diff branch1..branch2  # Show differences between two branches.
+        git diff commit1..commit2  # Show differences between two commits.
+      </code></pre>
+
+      <h2>10. .gitignore</h2>
+      <pre><code>
+        A .gitignore file tells Git which files or folders to ignore so they don’t get tracked, committed, or pushed to a repository.
+        <strong>Syntax & Examples:</strong>
+        Place a .gitignore file in your project root. Example:
+        # Ignore compiled files
+        *.class
+
+        # Ignore log files
+        *.log
+
+        # Ignore system files
+        .DS_Store
+        Thumbs.db
+
+        # Ignore specific folders
+        node_modules/
+        target/
+        build/
+       </code></pre>
+       
       <h2>9. Create and Switch Branch</h2>
       <pre><code>git checkout -b new-branch</code></pre>
 
