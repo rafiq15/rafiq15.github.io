@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Apache Kafka</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Apache Kafka – When to Use What</h1>
+        <p><em>Published: May 2025</em></p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <h2>What is Apache Kafka</h2>
+        <p>Kafka is an event streaming platform, because it is designed to handle and process continuous streams of
+            events or data in real time. </p>
+
+        <h2>When to use</h2>
+        <p>Apache Kafka is a versatile platform that can be used in various scenarios where high-throughput,
+            low-latency, and real-time data processing are required. Here are some common use cases and situations where
+            Kafka is particularly well-suited:
+        </p>
+        <ol>
+            <li><strong>Real-time Data Streaming:</strong> Kafka is ideal for applications that require real-time data
+                processing, such as log aggregation, event sourcing, and stream processing.</li>
+            <li><strong>Data Integration:</strong> Kafka can serve as a central hub for integrating data from multiple
+                sources, allowing you to collect, transform, and distribute data across different systems.</li>
+            <li><strong>Event-Driven Architectures:</strong> Kafka is commonly used in event-driven architectures to
+                decouple services and enable asynchronous communication between them.</li>
+            <li><strong>Analytics and Monitoring:</strong> Kafka can be used to collect and analyze large volumes of
+                data in real time, making it suitable for monitoring applications and analytics pipelines.</li>
+        </ol>
+        <h2>Kafka Components</h2>
+        <ol>
+            <li><strong>Producers:</strong> Applications that publish data to Kafka topics. The Producers is a source of
+                data while publish messages/events</li>
+            <li><strong>Consumers:</strong> Applications that subscribe to topics and process the data. Consumers act as
+                a receuver. It's responsible to receive/consume message/events.
+            </li>
+            <li><strong>Topics:</strong> Categories or feeds to which records are published.</li>
+            <li><strong>Brokers:</strong> The kafka Brokers is nothing but just a server that store and manage the data.
+                It is worked as intermediary (help in message exchanges)between producers and consumers.
+            </li>
+            <li><strong>Clusters:</strong> A group of Kafka brokers that work together to provide high availability and
+                fault tolerance. There can be one or more brokers in the kafka Clusters.</li>
+            </li>
+            <li><strong>Zookeeper:</strong> A service for coordinating distributed applications, used by Kafka for
+                managing brokers and topics.</li>
+            <li><strong>Partitions:</strong> Subdivisions of topics that allow for parallel processing and scalability.
+            </li>
+            <li><strong>Offsets:</strong> Unique identifiers for each record within a partition, used to track the
+                position of consumers.</li>
+            <li><strong>Consumer Groups:</strong> A group of consumers that work together to consume data from a topic,
+
+                allowing for load balancing and fault tolerance.</li>
+            <li><strong>Streams API:</strong> A library for building stream processing applications that can read from
+                and
+                write to Kafka topics.</li>
+            <li><strong>Connect API:</strong> A framework for integrating Kafka with external systems, such as databases
+                and message queues.</li>
+            <li><strong>Schema Registry:</strong> A service for managing and enforcing data schemas in Kafka, ensuring
+                data compatibility and consistency.</li>
+        </ol>
+    </main>
+
+    <footer>
+        &copy; 2025 Rafiqul Islam. All rights reserved.
+    </footer>
+</body>
+
+</html>
