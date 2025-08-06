@@ -39,6 +39,81 @@
             <h2>Getting Started with Docker</h2>
             <p>To start using Docker, you need to install Docker on your machine. You can download Docker Desktop for
                 Windows or macOS, or install Docker Engine on Linux.</p>
+
+            <h3>Key features of Docker containers include:</h3>
+            <ul>
+                <li>Isolation: Each container runs in its own environment, ensuring that applications do not interfere
+                    with
+                    each other.</li>
+                <li>Portability: Docker containers can run on any system that has Docker installed, making it easy to
+                    move
+                    applications between development, testing, and production environments.</li>
+                <li>Scalability: Containers can be easily scaled up or down to handle varying loads, making them
+                    suitable for
+                    microservices architectures.</li>
+                <li>Efficiency: Containers share the host OS kernel, which reduces overhead compared to traditional VMs,
+                    allowing for faster startup times and lower resource usage.</li>
+                <li>Version Control: Docker images can be versioned, allowing developers to track changes and roll back
+                    to
+                    previous versions if needed.</li>
+            </ul>
+
+            <h2>Basic Command</h2>
+            <p>Here are some basic Docker commands to get you started:</p>
+            <ul>
+                <li><code>docker run</code>: Run a container from an image.</li>
+                <li><code>docker ps</code>: List running containers.</li>
+                <li><code>docker images</code>: List available Docker images.</li>
+                <li><code>docker pull</code>: Download an image from Docker Hub.</li>
+                <li><code>docker build</code>: Build a Docker image from a Dockerfile.</li>
+                <li><code>docker exec</code>: Execute a command in a running container.</li>
+                <li><code>docker stop</code>: Stop a running container.</li>
+                <li><code>docker rm</code>: Remove a stopped container.</li>
+                <li><code>docker rmi</code>: Remove a Docker image.</li>
+            </ul>
+
+            <h2>How to Dockerize Spring Boot Application</h2>
+            <p>To Dockerize a Spring Boot application, follow these steps:</p>
+            <ol>
+                <li>Create a Dockerfile in the root directory of your Spring Boot project.</li>
+                <li>Write the Dockerfile to specify how to build the Docker image.</li>
+                Example Dockerfile:
+                <pre>
+                FROM openjdk:11-jre
+                COPY target/your-app.jar app.jar
+                ENTRYPOINT ["java", "-jar", "/app.jar"] 
+                </pre>
+                <li>Build the Docker image using the command <code>docker build -t your-image-name .</code></li>
+                <li>Run the Docker container using <code>docker run -p 8080:8080 your-image-name</code></li>
+                <li>Access your Spring Boot application at <code>http://localhost:8080</code>.</li>
+            </ol>
+
+            <h2>Docker image push to Docker Hub</h2>
+            <p>To push your Docker image to Docker Hub, follow these steps:</p>
+            <ol>
+                <li>Log in to Docker Hub using the command <code>docker login</code>.</li>
+                <li>Tag your image with your Docker Hub username:
+                    <code>docker tag your-image-name your-dockerhub-username/your-image-name</code>.
+                </li>
+                <li>Push the image to Docker Hub: <code>docker push your-dockerhub-username/your-image-name</code>.</li>
+                Example:
+                <pre>
+              docker tag api-gateway-service:latest bjitpdmad/api-gateway-service
+              docker push bjitpdmad/api-gateway-service
+                </pre>
+            </ol>
+            <h2>Docker pull image from Docker Hub</h2>
+            <p>To pull your Docker image from Docker Hub, follow these steps:</p>
+            <ol>
+                <li>Log in to Docker Hub using the command <code>docker login</code>.</li>
+                <li>Pull the image from Docker Hub: <code>docker pull your-dockerhub-username/your-image-name</code>.</li>
+                example:
+                <pre>
+              docker pull bjitpdmad/api-gateway-service
+            </pre>
+                <li>Run the pulled image using <code>docker run -p 8080:8080 your-dockerhub-username/your-image-name</code>.</li>
+            </ol>
+
     </main>
 
     <footer>
