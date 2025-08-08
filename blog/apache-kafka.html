@@ -71,6 +71,26 @@
             <li><strong>Schema Registry:</strong> A service for managing and enforcing data schemas in Kafka, ensuring
                 data compatibility and consistency.</li>
         </ol>
+        <h2>How Kafka Partitions Work by Default</h2>
+        <p>By default, Kafka partitions messages in a round-robin fashion across all available partitions for a topic.
+            This means that when a producer sends messages to a topic, the messages are distributed evenly across the
+            partitions, allowing for parallel processing and increased throughput.</p>
+        <p>However, Kafka also allows for more advanced partitioning strategies. Producers can specify a partition key
+            when sending messages, which determines the partition to which the message is sent. This is useful for
+            ensuring that related messages are sent to the same partition, allowing for ordered processing.</p>
+        <p>Partition Assignment: When you create a topic, you specify the number of partitions.
+            Kafka clients (producers and consumers) automatically interact with these partitions to distribute or
+            consume data.</p>
+        <p>Load Distribution: Kafka automatically distributes partitions across brokers in the cluster to ensure load
+            balancing.
+            This helps to prevent any single broker from becoming a bottleneck and allows for better resource
+            utilization.</p>
+        <p>Message Routing:
+
+            Producers send messages to partitions based on:
+            A keyed strategy (e.g., hash of the key determines partition)
+            Or, if no key is provided, Kafka applies a round-robin approach to evenly distribute messages among
+            partitions.</p>
     </main>
 
     <footer>
