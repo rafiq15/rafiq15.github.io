@@ -3,14 +3,14 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Docker Basic</title>
+    <title>Docker Zero to Advanced</title>
     <link rel="stylesheet" href="../style.css" />
 </head>
 
 <body>
     <header>
         <h1>Docker zero to advanced</h1>
-        <p><em>Published: May 2025</em></p>
+        <p><em>Published: August 2025</em></p>
     </header>
 
     <nav>
@@ -58,7 +58,7 @@
                     previous versions if needed.</li>
             </ul>
 
-            <h2>Basic Command</h2>
+            <h2>Basic Commands</h2>
             <p>Here are some basic Docker commands to get you started:</p>
             <ul>
                 <li><code>docker run</code>: Run a container from an image.</li>
@@ -108,18 +108,74 @@
             <p>To pull your Docker image from Docker Hub, follow these steps:</p>
             <ol>
                 <li>Log in to Docker Hub using the command <code>docker login</code>.</li>
-                <li>Pull the image from Docker Hub: <code>docker pull your-dockerhub-username/your-image-name</code>.</li>
-                example:
+                <li>Pull the image from Docker Hub: <code>docker pull your-dockerhub-username/your-image-name</code>.
+                </li>
+                Example:
                 <pre>
               docker pull bjitpdmad/api-gateway-service
             </pre>
-                <li>Run the pulled image using <code>docker run -p 8080:8080 your-dockerhub-username/your-image-name</code>.</li>
+                <li>Run the pulled image using
+                    <code>docker run -p 8080:8080 your-dockerhub-username/your-image-name</code>.
+                </li>
             </ol>
+
+            <h2>Example Workflow: Multi-Stage Build Debugging</h2>
+            <p>When working with multi-stage builds in Docker, you might encounter issues that require debugging.
+                Here’s a simple workflow to debug a multi-stage build:</p>
+            <ol>
+                <li>Start with a basic Dockerfile that uses multi-stage builds.</li>
+                <li>Use the <code>docker build</code> command with the <code>--target</code> option to build a specific
+                    stage.
+                    For example, if you have a stage named "builder", you can run:
+                    <pre>docker build --target builder -t my-app:builder .</pre>
+                    <pre>docker build -t redis-build --target build .</pre>
+                </li>
+                <li>Run the container from the builder stage to inspect the environment:
+                    <code>docker run -it redis-build bash</code>
+                </li>
+            </ol>
+            <p>By running the container interactively, you can check the contents of the build stage, verify that
+                dependencies are installed correctly, and troubleshoot any issues.</p>
+
+            <h2>Understanding the Command:</h2>
+            <p>The command
+            <pre>docker run --rm -it my-app:builder</pre> does the following:</p>
+            <ul>
+                <li><code>docker run</code>: This command is used to create and start a new container from a specified
+                    image.</li>
+                <li><code>--rm</code>: This option automatically removes the container when it exits, keeping your
+                    system
+                    clean.</li>
+                <li><code>-it</code>: This option allows you to run the container in interactive mode with a TTY, which
+                    is useful for debugging.</li>
+                <li><code>my-app:builder</code>: This specifies the image to run, where "my-app" is the name of the
+                    image and "builder" is the tag or stage name.</li>
+            </ul>
+            <p>By using this command, you can enter the container and interact with it, allowing you to debug issues
+                related to the multi-stage build.</p>
+
+            <h2>Example Multi-Stage Dockerfile:</h2>
+            <pre># Stage 1: Builder
+            FROM gradle:8.5-jdk21 AS builder
+            WORKDIR /app
+            COPY . .
+            RUN gradle build
+
+            # Stage 2: Runtime
+            FROM openjdk:21-jdk-slim
+            WORKDIR /app
+            COPY --from=builder /app/build/libs/my-app.jar .
+            CMD ["java", "-jar", "my-app.jar"] 
+            </pre>
+            <p>This Dockerfile defines two stages: the first stage builds the application using Gradle, and the second
+                stage runs the built application using OpenJDK.</p>
+
+        </div>
 
     </main>
 
     <footer>
-        &copy; 2025 Md. Your Name
+        &copy; 2025 Rafiq's Blog
     </footer>
 </body>
 
