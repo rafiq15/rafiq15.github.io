@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Git Basic</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Web Server vs App Server</h1>
+    <p><em>Published: May 2025</em></p>
+  </header>
+
+  <nav>
+    <a href="../index.html">Home</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../blog.html">Blog</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+
+  <main>
+    <h2>Web Server vs App Server</h2>
+    <p>In the world of web development, the terms "web server" and "application server" are often used interchangeably, but they refer to different components of a web application architecture. Understanding the distinction between the two is crucial for developers and system administrators alike.</p>
+
+    <h3>Web Server</h3>
+    <p>A web server is designed to serve static content, such as HTML pages, images, and other files. It handles HTTP requests from clients (usually web browsers) and responds with the requested resources. Popular web servers include Apache, Nginx, and Microsoft IIS.</p>
+
+    <h3>Application Server</h3>
+    <p>An application server, on the other hand, is designed to serve dynamic content and business logic. It can process requests, interact with databases, and generate dynamic web pages on the fly. Application servers often include features such as transaction management, security, and scalability. Examples of application servers include Apache Tomcat, JBoss, and IBM WebSphere.</p>
+
+    <h3>Key Differences</h3>
+    <ul>
+      <li><strong>Content Type:</strong> Web servers serve static content, while application servers serve dynamic content.</li>
+      <li><strong>Processing:</strong> Web servers handle HTTP requests and responses, while application servers execute business logic and interact with databases.</li>
+      <li><strong>Performance:</strong> Web servers are optimized for serving static files quickly, while application servers are optimized for processing complex requests.</li>
+    </ul>
+
+    <h2>When to Use a Web Server</h2>
+    You would use a web server if your primary task is to serve static content or handle basic request forwarding.
+
+
+  <ul>
+    <li><strong>Key Scenarios</strong>
+      <ul>
+        <li><strong>Static Websites:</strong> If your website primarily consists of pre-rendered <code>HTML</code>, <code>CSS</code>, and <code>JavaScript</code> files, a web server like <strong>Nginx</strong> or <strong>Apache HTTP Server</strong> is ideal.</li>
+        <li><strong>Reverse Proxy:</strong> Web servers are often used as reverse proxies to forward client requests to backend services or application servers. For example:
+          <ul>
+            <li>Using <strong>Nginx</strong> to load balance multiple application servers.</li>
+            <li>Proxying API requests from a React/Vue frontend to microservices.</li>
+          </ul>
+        </li>
+        <li><strong>Caching:</strong> Many web servers have built-in caching mechanisms that improve performance for static files or frequently accessed content.</li>
+        <li><strong>CDNs:</strong> Distributed Content Delivery Networks (CDNs) rely on web servers to deliver cached, geographically distributed content (e.g., <strong>Cloudflare</strong>, <strong>Akamai</strong>).</li>
+      </ul>
+    </li>
+  </ul>
+  <blockquote>
+    <strong>Why Choose a Web Server?</strong>
+    <ul>
+      <li>Simplicity and high performance for static file delivery.</li>
+      <li>Efficient resource usage for stateless operations.</li>
+      <li>Acts as a gateway or load balancer to backend services.</li>
+    </ul>
+  </blockquote>
+
+<H2>When to Use an Application Server</H2>
+You would use an application server when your system includes dynamic content generation or needs to execute server-side business logic.
+
+<ul>
+  <li><strong>Key Scenarios</strong>
+    <ul>
+      <li><strong>Dynamic Web Applications:</strong> Applications requiring user interaction and server-side response generation (e.g., rendering data from a database or running server code) need an application server. Examples:
+        <ul>
+          <li>E-commerce websites.</li>
+          <li>Online banking systems.</li>
+        </ul>
+      </li>
+      <li><strong>APIs and Microservices:</strong> Application servers are essential for building RESTful APIs or executing service logic for microservices-based architectures. For instance:
+        <ul>
+          <li>You might use <strong>Spring Boot</strong> (a lightweight application server) to expose APIs consumed by various clients.</li>
+        </ul>
+      </li>
+      <li><strong>Middleware Functionality:</strong> In multi-tiered architectures, application servers provide middleware-like features such as:
+        <ul>
+          <li>Transaction management.</li>
+          <li>Connection pooling.</li>
+          <li>Messaging (JMS, SOAP). Example: Enterprise-grade application servers like <strong>JBoss/WildFly</strong> or <strong>WebLogic</strong>.</li>
+        </ul>
+      </li>
+      <li><strong>Enterprise Applications:</strong> Complex systems with multiple integrations (e.g., CRM, ERP) often require sophisticated capabilities provided by application servers.</li>
+      <li><strong>Scalability and Fault Tolerance:</strong> Application servers like <strong>GlassFish</strong> or <strong>Tomcat</strong> allow clustering and session replication for scaling dynamic applications.</li>
+    </ul>
+  </li>
+</ul>
+<blockquote>
+  <strong>Why Choose an Application Server?</strong>
+  <ul>
+    <li>To handle dynamic, server-side processes like API requests, transaction management, or authentication.</li>
+    <li>Provides integration with databases, messaging services, and enterprise-level protocols.</li>
+    <li>Suitable for business-critical systems requiring scalability, resilience, and security.</li>
+  </ul>
+</blockquote>
+
+<h2>Combining Both: Web Server + Application Server</h2>
+
+<ul>
+  <li><strong>Common Architecture</strong>
+    <ul>
+      <li>A web server acts as a front-end proxy, handling client requests and efficiently serving static content (e.g., using <strong>Nginx</strong> or <strong>Apache HTTP Server</strong>).</li>
+      <li>The web server forwards any dynamic requests to a backend application server (e.g., <strong>Tomcat</strong>, <strong>Spring Boot</strong>, or <strong>WebLogic</strong>) that executes business logic and generates responses.</li>
+    </ul>
+  </li>
+</ul>
+<blockquote>
+  <strong>Advantages of Combining:</strong>
+  <ul>
+    <li><strong>Improved Performance:</strong> Web servers handle static content faster than application servers, reducing resource demand on application servers.</li>
+    <li><strong>Load Balancing:</strong> Web servers like Nginx can distribute traffic across multiple application server instances for better scalability.</li>
+    <li><strong>Security:</strong> A web server serves as a layer between users and the application server, adding an extra level of security. Termination of SSL certificates typically happens at the web server.</li>
+    <li><strong>Flexibility:</strong> Allows decoupling of responsibilities: web servers handle static assets while application servers focus on business logic.</li>
+  </ul>
+</blockquote>
+
+<H2>Summary Table: When and Why to Use Each</H2>
+
+<table border="1" cellpadding="5" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Use Case</th>
+      <th>Web Server</th>
+      <th>Application Server</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Static Websites</td><td>Yes</td><td>No</td></tr>
+    <tr><td>Dynamic Websites</td><td>No</td><td>Yes</td></tr>
+    <tr><td>REST APIs &amp; Microservices</td><td>Acts as a reverse proxy</td><td>Yes (processes the business logic)</td></tr>
+    <tr><td>Load Balancing</td><td>Yes</td><td>Not typically</td></tr>
+    <tr><td>Transaction Management</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Caching</td><td>Yes</td><td>Sometimes</td></tr>
+    <tr><td>Middleware Integration (e.g., JMS)</td><td>No</td><td>Yes</td></tr>
+    <tr><td>Example Technologies</td><td>Nginx, Apache HTTP Server, Microsoft IIS</td><td>Tomcat, WildFly, WebLogic, GlassFish, Spring Boot</td></tr>
+  </tbody>
+</table>
+
+<h2>Conclusion</h2>
+<ul>
+  <li>Use a <strong>Web Server</strong> if you need fast and efficient delivery of static content or want a lightweight reverse proxy solution.</li>
+  <li>Use an <strong>Application Server</strong> when your application requires server-side logic, dynamic content generation, or advanced middleware features like transaction management.</li>
+  <li>Typically, modern architectures combine both for optimal performance, scalability, and separation of concerns.</li>
+</ul>
+  </main>
+
+  <footer>
+    &copy; 2025 Md. Your Name
+  </footer>
+</body>
+
+</html>
