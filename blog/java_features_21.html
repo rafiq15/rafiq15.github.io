@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Git Basic</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Java 21 Features</h1>
+        <p><em>Published: August 2025</em></p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="../projects.html">Projects</a>
+        <a href="../blog.html">Blog</a>
+        <a href="../contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <h2>New Features in Java 21</h2>
+        <ul>
+            <li><strong>Pattern Matching for Switch:</strong> Enhancements to the switch statement, allowing for pattern
+                matching.</li>
+            <li><strong>Record Types:</strong> Introduction of record types for immutable data classes.</li>
+            <li><strong>Virtual Threads:</strong> Support for lightweight, user-mode threads to simplify concurrent
+                programming.</li>
+        </ul>
+        <h2>What are Virtual Threads?</h2>
+        <p>Virtual threads are a new lightweight implementation of threads in Java, aimed at simplifying concurrent
+            programming. They allow developers to write code in a synchronous style while benefiting from the
+            scalability of asynchronous programming.</p>
+        <p>With virtual threads, the Java platform aims to reduce the complexity of writing concurrent code,
+            making it easier for developers to build high-performance applications.</p>
+        <p>Virtual threads are part of Project Loom, which introduces a new concurrency model to the Java platform.</p>
+        <p>Traditional threads in Java map directly to OS threads, which consume significant system resources.
+            Virtual Threads are user-mode threads managed by the JVM rather than the operating system.
+            Virtual Threads use far fewer resources compared to platform threads, enabling you to have millions of them.
+        </p>
+        <h2>Benefits of Virtual Threads</h2>
+        <ul>
+            <li><strong>Scalability:</strong> Virtual threads allow for a high level of concurrency, making it easier to
+                scale applications.</li>
+            <li><strong>Simplicity:</strong> Developers can write code in a synchronous style, reducing the complexity
+                of asynchronous programming.</li>
+            <li><strong>Resource Efficiency:</strong> Virtual threads consume fewer resources, allowing for more threads
+                to be active at once.</li>
+        </ul>
+        <h2>How Do Virtual Threads Work?</h2>
+        <p>Virtual threads work by allowing the JVM to manage thread scheduling and execution more efficiently. Instead
+            of relying on the operating system to manage threads, the JVM can optimize the execution of virtual threads
+            based on the application's needs.</p>
+        <p>This means that virtual threads can be created and destroyed more quickly than traditional threads, and the
+            JVM can make better decisions about how to allocate resources to different threads.</p>
+        <h2>Example Usage</h2>
+        <p>Here's a simple example of using virtual threads in Java:</p>
+        <pre><code>
+    Runnable task = () -> {
+        System.out.println("Running in a virtual thread");
+    };
+    Thread.startVirtualThread(task);
+        </code></pre>
+        <h2>Example: Using Virtual Threads in Java 21</h2>
+        <p>In Java 21, using virtual threads is straightforward. Here's an example:</p>
+        <pre><code>
+    public class VirtualThreadsDemo {
+        public static void main(String[] args) throws InterruptedException {
+            // Creating a virtual thread
+            Thread virtualThread = Thread.ofVirtual().start(() -> {
+                System.out.println("Hello from virtual thread " + Thread.currentThread());
+            });
+
+            // Wait for the virtual thread to complete
+            virtualThread.join();
+        }
+    }
+        </code></pre>
+        <h2>Performance Comparison: Virtual vs Platform Threads</h2>
+        <p>Virtual threads are designed to be more efficient than traditional platform threads. They use less memory
+            and can handle a larger number of concurrent tasks without the overhead associated with OS-level threads.
+        </p>
+        <p>Let’s compare creating 10,000 threads with traditional platform threads and virtual threads.</p>
+        <pre><code>
+    public class ThreadComparison {
+        public static void main(String[] args) {
+            // Platform Threads
+            System.out.println("Platform Threads:");
+            long startTime = System.currentTimeMillis();
+            for (int i = 0; i < 10000; i++) {
+                new Thread(() -> {}).start();
+            }
+            System.out.println("Completed in " + (System.currentTimeMillis() - startTime) + " ms");
+
+            // Virtual Threads
+            System.out.println("\nVirtual Threads:");
+            startTime = System.currentTimeMillis();
+            for (int i = 0; i < 10000; i++) {
+                Thread.ofVirtual().start(() -> {});
+            }
+            System.out.println("Completed in " + (System.currentTimeMillis() - startTime) + " ms");
+        }
+    }
+        </code></pre>
+
+        <h1>Sealed classes</h1>
+        <p>Sealed classes are a new feature in Java 21 that allow developers to control which classes can extend or
+            implement them. This is useful for creating a more predictable and maintainable class hierarchy.</p>
+        <h2>Benefits of Sealed Classes</h2>
+        <ul>
+            <li><strong>Controlled Extensibility:</strong> Sealed classes allow you to specify a limited set of
+                subclasses, making it easier to reason about your code.</li>
+            <li><strong>Improved Maintainability:</strong> By restricting inheritance, you can reduce the risk of
+                unintended side effects from changes in subclasses.</li>
+            <li><strong>Enhanced Pattern Matching:</strong> Sealed classes work well with pattern matching, allowing for
+                more concise and readable code.</li>
+        </ul>
+        <h2>Why Use Sealed Classes?</h2>
+        <ul>
+            <li><strong>Control Hierarchies:</strong> Avoid unintended extensions/implementations.</li>
+            <li><strong>Enhanced Maintainability:</strong> Clear structure makes future changes safer and easier.</li>
+            <li><strong>Exhaustive Pattern Matching:</strong> Seamless integration with switch expressions.</li>
+        </ul>
+        <h2>Example of Sealed Classes</h2>
+        <pre><code>
+    public sealed class Shape permits Circle, Rectangle {
+    }
+
+    public final class Circle extends Shape {
+    }
+
+    public final class Rectangle extends Shape {
+    }
+        </code></pre>
+        <h2>Example: Using Sealed Classes</h2>
+        <pre><code>Define a Sealed Class:
+    // Define a Sealed Class:
+    public sealed class Shape permits Circle, Rectangle, Triangle {
+        public abstract double area(); // Abstract method for area calculation
+    }
+
+    // Circle is a permitted class extending Shape
+    public final class Circle extends Shape {
+        private final double radius;
+
+        public Circle(double radius) {
+            this.radius = radius;
+        }
+
+        @Override
+        public double area() {
+            return Math.PI * radius * radius;
+        }
+    }
+
+    // Rectangle is another permitted class
+    public final class Rectangle extends Shape {
+        private final double length, width;
+
+        public Rectangle(double length, double width) {
+            this.length = length;
+            this.width = width;
+        }
+
+        @Override
+        public double area() {
+            return length * width;
+        }
+    }
+
+    // Triangle is also permitted
+    public non-sealed class Triangle extends Shape {
+        private final double base, height;
+
+        public Triangle(double base, double height) {
+            this.base = base;
+            this.height = height;
+        }
+
+        @Override
+        public double area() {
+            return 0.5 * base * height;
+        }
+    }
+    <footer>
+        &copy; 2025 Md. Rafiqul Islam
+    </footer>
+</body>
+
+</html>
