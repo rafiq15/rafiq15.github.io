@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Model Context Protocol (MCP) - Technical Documentation</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Model Context Protocol (MCP)</h1>
+        <p><em>Published: August 2025</em></p>
+    </header>
+
+    <nav>
+        <a href="../blog.html">&larr; Back to Blog</a>
+    </nav>
+
+    <main>
+        <h2>Overview</h2>
+        <p>
+            The <strong>Model Context Protocol (MCP)</strong> is a standardized protocol designed to enable seamless
+            communication and interoperability between various components in a machine learning (ML) ecosystem. MCP
+            provides a unified interface for models, data sources, and applications, allowing them to exchange context,
+            data, and results efficiently and securely.
+        <p>The Model Context Protocol (MCP) represents a significant shift in how AI models interact with real-time
+            data. By eliminating the need for intermediate processes like embeddings and vector databases, MCP offers a
+            more efficient, secure, and scalable solution.</p>
+        </p>
+
+        <p>MCP stands for Model Context Protocol. It’s an open standard that allows AI systems, like large language
+            models, to connect with external tools, data sources, and services. An MCP server acts like a bridge or
+            adapter that gives an AI “agent” access to resources such as databases, APIs, or files through a standard
+            interface.</p>
+        <h2>Key Features</h2>
+        <ul>
+            <li><strong>Interoperability:</strong> Abstracts implementation details, enabling different ML models,
+                frameworks, and data sources to interact without compatibility issues.</li>
+            <li><strong>Context Awareness:</strong> Allows components to share and utilize contextual information,
+                improving the relevance and accuracy of predictions and actions.</li>
+            <li><strong>Scalability:</strong> Designed for large-scale deployments, supporting distributed systems and
+                high-throughput data exchanges.</li>
+            <li><strong>Extensibility:</strong> Easily extended to support new model types, data formats, and
+                integration patterns.</li>
+            <li><strong>Security:</strong> Built-in authentication and authorization mechanisms for secure
+                communication.</li>
+        </ul>
+
+        <h2>Architecture</h2>
+        <p>MCP consists of three primary components:</p>
+        <ul>
+            <li><strong>MCP Host:</strong> The main application or service that integrates with an LLM or other ML
+                models. Responsible for orchestrating requests, managing context, and connecting to external data
+                sources via MCP Clients.</li>
+            <li><strong>MCP Client:</strong> A lightweight client library or service that acts as a bridge between the
+                MCP Host and external data sources or services. Handles protocol-specific communication, serialization,
+                and context propagation.</li>
+            <li><strong>MCP Server:</strong> Hosts the MCP API and manages requests from MCP Clients. Provides endpoints
+                for context exchange, data retrieval, and model inference.</li>
+        </ul>
+
+        <h2>Protocol Workflow</h2>
+        <ol>
+            <li><strong>Initialization:</strong> The MCP Host initializes the protocol stack and establishes connections
+                with one or more MCP Clients.</li>
+            <li><strong>Context Exchange:</strong> The Host and Clients exchange contextual information (e.g., user
+                session, environment variables, request metadata).</li>
+            <li><strong>Data Request:</strong> The Host requests data or services from external sources via the MCP
+                Client.</li>
+            <li><strong>Model Inference:</strong> The Host invokes model inference, passing the relevant context and
+                data.</li>
+            <li><strong>Result Propagation:</strong> The results are returned to the Host, which may further process or
+                relay them to downstream systems.</li>
+        </ol>
+
+        <h2>Example Use Cases</h2>
+        <ul>
+            <li>Integrating LLMs with enterprise data sources (databases, APIs) for context-aware responses.</li>
+            <li>Orchestrating multi-model pipelines where each model requires specific context or data.</li>
+            <li>Building scalable ML services that can dynamically connect to new data sources or models.</li>
+        </ul>
+
+        <h2>Security Considerations</h2>
+        <ul>
+            <li>All communication should be encrypted (e.g., TLS).</li>
+            <li>Authentication tokens or API keys should be used to verify component identities.</li>
+            <li>Access control policies should be enforced at the MCP Server level.</li>
+        </ul>
+
+        <h2>Extending MCP</h2>
+        <ul>
+            <li>Define new message types or endpoints as needed for custom integrations.</li>
+            <li>Implement additional context propagation strategies for advanced use cases.</li>
+            <li>Contribute to the open-source MCP specification to support emerging ML paradigms.</li>
+        </ul>
+
+        <h2>MCP vs Traditional Approaches</h2>
+        <table border="1" style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+            <thead>
+                <tr style="background-color: #f5f5f5;">
+                    <th style="padding: 10px; text-align: left;">Aspect</th>
+                    <th style="padding: 10px; text-align: left;">Traditional RAG</th>
+                    <th style="padding: 10px; text-align: left;">MCP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="padding: 10px;"><strong>Data Access</strong></td>
+                    <td style="padding: 10px;">Pre-processed, embedded data</td>
+                    <td style="padding: 10px;">Real-time, dynamic data access</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><strong>Latency</strong></td>
+                    <td style="padding: 10px;">Higher due to embedding process</td>
+                    <td style="padding: 10px;">Lower, direct connection</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><strong>Data Freshness</strong></td>
+                    <td style="padding: 10px;">Limited by embedding updates</td>
+                    <td style="padding: 10px;">Always current</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px;"><strong>Security</strong></td>
+                    <td style="padding: 10px;">Data stored in vector DB</td>
+                    <td style="padding: 10px;">Direct, secure connections</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Spring AI Integration</h2>
+        <p>Spring AI provides excellent support for MCP through its framework integration. Here's how to leverage MCP
+            with Spring AI:</p>
+
+        <h3>Key Spring AI MCP Features</h3>
+        <ul>
+            <li><strong>Auto-configuration:</strong> Spring Boot auto-configuration for MCP clients and servers</li>
+            <li><strong>Dependency Injection:</strong> Native Spring DI support for MCP components</li>
+            <li><strong>Observable:</strong> Built-in observability and metrics for MCP operations</li>
+            <li><strong>Type Safety:</strong> Strong typing support for MCP message exchanges</li>
+        </ul>
+
+        <h3>Configuration Example</h3>
+        <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;">
+<code># application.yml
+spring:
+  ai:
+    mcp:
+      client:
+        enabled: true
+        servers:
+          - name: "database-server"
+            transport: "stdio"
+            command: "node"
+            args: ["./mcp-servers/database-server.js"]
+          - name: "file-server"
+            transport: "sse"
+            url: "http://localhost:8080/mcp/sse"</code>
+        </pre>
+
+        <h3>Java Implementation</h3>
+        <pre style="background-color: #f5f5f5; padding: 15px; border-radius: 5px; overflow-x: auto;">
+<code>@RestController
+public class MCPController {
+    
+    @Autowired
+    private McpClient mcpClient;
+    
+    @PostMapping("/query")
+    public ResponseEntity&lt;String&gt; processQuery(@RequestBody QueryRequest request) {
+        // Use MCP to get real-time data
+        McpResponse response = mcpClient.callTool("database-server", 
+            "query", request.getParameters());
+        
+        // Process with AI model
+        String result = aiModel.generate(response.getContent());
+        
+        return ResponseEntity.ok(result);
+    }
+}</code>
+        </pre>
+
+        <h2>GitHub Project sample</h2>
+        <p>For a practical implementation and more details, you can visit the GitHub repository of the Model
+            Context Protocol (MCP): <a href="https://github.com/rafiq15/spring-ai-mcp" target="_blank"
+                rel="noopener noreferrer">quick access</a></p>
+
+        <h3>What is MCP (Model Context Protocol)?</h3>
+        <p>In simple terms, the Model Context Protocol (MCP) is an open standard and communication protocol that allows
+            AI applications (like Claude AI) to securely interact with external data sources, tools, and services on
+            your behalf.
+
+            Think of it as a universal adapter or a set of rules that lets an AI model safely "talk to" your databases,
+            code repositories, calendars, and other software without the AI itself having direct access to them. The AI
+            uses these connections to gather relevant information and perform actions, making it much more powerful and
+            context-aware.</p>
+        <h3>What is the role of the MCP Server in a distributed system?</h3>
+        <p>The MCP server:
+        <ul>
+            <li>Hosts and provides access to AI/ML models.</li>
+            <li>Processes incoming client requests.</li>
+            <li>Maintains context awareness by preserving and using session-specific or task-specific data (e.g.,
+                tracking conversation history in chatbots).</li>
+        </ul>
+        </p>
+        <h3>Explain the purpose of the MCP Client in the MCP architecture.</h3>
+        <p>The MCP client serves as the front-end or intermediary tool that:
+        <ol>
+            <li>Captures user inputs (e.g., commands, files).</li>
+            <li>Sends structured requests to the MCP server.</li>
+            <li>Receives and processes results from the server (e.g., displaying predictions or recommendations).</li>
+        </ol>
+        </p>
+
+        <h3>How does the MCP protocol manage contextual information between the server and client?</h3>
+        <ol>
+            MCP maintains contextual information by:
+            <li>Storing session IDs or metadata tied to the user/task.</li>
+            <li>Logging stateful information (e.g., conversation history, preferences) in memory or databases for
+                future continuity.</li>
+        </ol>
+        </p>
+        <h3>Why is context management important in AI-based systems?</h3>
+        <p>Context management is crucial in AI-based systems because it ensures that AI systems behave intelligently and
+            consistently by:</p>
+        <ol>
+            <li>Keeping track of prior interactions.</li>
+            <li>Delivering personalized responses or decisions (e.g., "recommending products based on previous
+                searches").</li>
+        </ol>
+        <h3>Explain how context tracking works in MCP. Give an example</h3>
+        <p>Context tracking in MCP involves maintaining a record of user interactions and preferences over time. This is
+            achieved through:</p>
+        <ol>
+            <li>Session management: Each user interaction is associated with a unique session ID, allowing the system to
+                retrieve relevant context for ongoing conversations.</li>
+            <li>Stateful information storage: MCP can log user preferences, past queries, and other relevant data in a
+                structured format, enabling personalized responses.</li>
+        </ol>
+        <p>For example, if a user frequently asks about "machine learning," the MCP can remember this context and
+            prioritize related information in future interactions.</p>
+
+        <h3>What are the advantages and challenges of using the MCP architecture?</h3>
+        <p>Advantages:</p>
+        <ol>
+            <li>Centralized model and context management.</li>
+            <li>Scalable for multiple clients.</li>
+            <li>Easier integration with external APIs or services.</li>
+        </ol>
+        <p>Challenges:</p>
+        <ol>
+            <li>Maintaining low latency for complex models.</li>
+            <li>Ensuring consistency across sessions in high-traffic environments.</li>
+        </ol>
+        <h3>How does MCP ensure secure communication between the client and the server?</h3>
+        By implementing:
+        <ol>
+            <li>Encryption: Using HTTPS/TLS for secure data transfer.</li>
+            <li>Authentication: API keys, OAuth2 tokens, or client certificates.</li>
+            <li>Access Control: Role-based permissions for sensitive AI models.</li>
+        </ol>
+
+    </main>
+
+    <footer>
+        &copy; 2025 Md. Rafiqul
+    </footer>
+</body>
+
+</html>

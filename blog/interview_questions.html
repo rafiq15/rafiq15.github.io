@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Basic Questions</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>Basic Questions</h1>
+        <p><em>Published: August 2025</em></p>
+    </header>
+
+    <nav>
+        <a href="../blog.html">&larr; Back to Blog</a>
+    </nav>
+
+    <main>
+        <h2>Some Interview Questions</h2>
+        <h3>Understanding @Component, @Service, and @Repository in Spring Boot</h3>
+        <p>In Spring Boot, <code>@Component</code>, <code>@Service</code>, and <code>@Repository</code> are
+            stereotypes used to define beans and their roles in the application context.</p>
+        <ul>
+            <li><strong>@Component:</strong> A generic stereotype for any Spring-managed component.</li>
+            <li><strong>@Service:</strong> A specialization of <code>@Component</code> for service-layer beans.</li>
+            <li><strong>@Repository:</strong> A specialization of <code>@Component</code> for data access objects
+                (DAOs).</li>
+        </ul>
+        <p>Using these annotations helps in organizing the code and provides better readability and maintainability.</p>
+
+
+        <h3>Handling Transaction Management in a Spring Boot Application with Multiple Data Sources</h3>
+        <p>To handle transaction management in a Spring Boot application with multiple data sources, you can use
+            the following approach:</p>
+        <ul>
+            <li>Define multiple <code>DataSource</code> beans for each database.</li>
+            <li>Use <code>@Primary</code> to specify the default data source if needed.</li>
+            <li>Configure <code>PlatformTransactionManager</code> for each data source.</   li>
+            <li>Use <code>@Transactional</code> annotation with the appropriate transaction manager for
+                methods that require transactions.</li>
+        </ul>
+        <p>This setup allows you to manage transactions across different databases effectively.</p>
+        <h3>Difference Between Eager and Lazy Loading in Hibernate</h3>
+        <p>Eager loading and lazy loading are two strategies for fetching related entities in Hibernate:</p>
+        <ul>
+            <li><strong>Eager Loading:</strong> Related entities are loaded immediately with the parent entity.
+                This can lead to performance issues if not managed properly, especially with large datasets.</li>
+            <li><strong>Lazy Loading:</strong> Related entities are loaded on-demand when accessed. This can improve
+                performance by reducing initial load time but may lead to <code>LazyInitializationException</code>
+                if accessed outside of a session context.</li>
+        </ul>
+        <p>Choosing between eager and lazy loading depends on the specific use case and performance considerations.</p>
+        <h3>What is the Difference Between PUT and POST HTTP Methods?</h3>
+        <p>The main differences between PUT and POST HTTP methods are:</p>
+        <ul>
+            <li><strong>PUT:</strong> Used to update or create a resource at a specific URL. It is idempotent,
+                meaning multiple identical requests will have the same effect as a single request.</li>
+            <li><strong>POST:</strong> Used to create a new resource. It is not idempotent, meaning multiple
+                identical requests may result in multiple resources being created.</li>
+        </ul>
+        <p>In summary, use PUT for updates and POST for creating new resources.</p>
+        <h3>What are Microservices, and What are the Benefits of Using Them?</h3>
+        <p>Microservices are an architectural style that structures an application as a collection of small,
+            independent services that communicate over well-defined APIs. Each service is responsible for a specific
+            business capability.</p>
+        <p>Benefits of using microservices include:</p>
+        <ul>
+            <li><strong>Scalability:</strong> Each service can be scaled independently based on demand.</li>
+            <li><strong>Flexibility:</strong> Different services can use different technologies and frameworks.</li>
+            <li><strong>Resilience:</strong> Failure in one service does not affect the entire application.</li>
+            <li><strong>Faster Development:</strong> Teams can work on different services simultaneously.</li>
+            <li><strong>Improved Maintainability:</strong> Smaller codebases are easier to manage and understand.</li>
+        </ul>
+        <p>Overall, microservices can lead to more agile and responsive development processes.</p>
+        <h3>How Does Spring Boot's Auto-Configuration Work Under the Hood?</h3>
+        <p>Spring Boot's auto-configuration works by using a combination of <code>@EnableAutoConfiguration</code> and
+            <code>spring.factories</code> files. When the application starts, Spring Boot scans the classpath for
+            available libraries and configurations.</p>
+        <p>Based on the detected libraries, Spring Boot automatically configures beans and settings that are
+            commonly used with those libraries. This is done through conditional annotations like
+            <code>@ConditionalOnClass</code> and <code>@ConditionalOnMissingBean</code>.</p>
+        <p>This mechanism allows developers to get started quickly without needing to manually configure every aspect
+            of their application.</p>
+            
+
+    </main>
+
+    <footer>
+        &copy; 2025 Md. Your Name
+    </footer>
+</body>
+
+</html>
