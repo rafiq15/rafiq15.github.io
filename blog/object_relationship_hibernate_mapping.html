@@ -2,42 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-      <p>This framework ma    <p><strong>Example:    <p>I'm going to build a relationship betwe    <p>    <p>I'm creating another r    <p>When a post is d    <p>Do you have any idea how we represent a m    <p>Employee is the owning entity i    <h2>Conclusion</h2>
-    <p>That's all! All the common relationship scenarios have been explained! 😍 According to the setup, uni-directional or bi-directional mappings can be implemented. I have taken some real-world examples and tried to explain them all with code. We should always think from the perspective of real-world entities and how they practically exist. Then our lives will be easier while coding!</p>
-    
-    <p>I hope you got the idea and will try to use ORM techniques in your day-to-day object-oriented programming. 💪</p>
-    
-    <p>Happy coding! ❤️</p>he relationship, so it's annotated with "@ManyToMany". We have to place the join table configuration here. The "@JoinTable" annotation represents this new table with the name "employee_roles". There we have to specify the two columns we use for the associations. They are primary keys in the employees and roles tables.</p>
-    
-    <p>I need to show the user roles when user data is retrieved. Since Hibernate considers LAZY as the default fetch type for ManyToMany mappings, I had to set EAGER fetch there.</p>y-to-many relationship in our logical design (ER diagram)? This is a very special scenario where we need an additional table beyond the two entities.</p>
-    
-    <p>Let me take an example and explain. In an Employee management system, every employee has one or more roles. Any employee can have multiple roles, and any role can be assigned to multiple employees! This is a many-to-many relationship.</p>
-    
-    <p><strong>How is the relationship built?</strong></p>
-    <p>Here, we have to record which employee has which role. That's the need for the 3rd table! Simply, we can save "employee_id" and "role_id" to maintain the employee and role associations. If there are any other related attributes specific to this association, we can reserve more columns in the same table.</p>ed, comments should not remain orphaned... It's obvious. So, we can set CascadeType as ALL.</p>lationship between Post and Comment entities. Any kind of post can have one or more comments. But every comment belongs to only one post! So, this is a one-to-many relationship exactly.</p>
-    
-    <p>I need to see the comments of each post while post data is fetched. That means comments should be eagerly fetched, right? That's why I have set the fetch type as EAGER for the comments set. Hibernate will set fetch type as LAZY by default for one-to-many mappings. To override that, I have specifically mentioned the fetch type.</p>
-    
-    <p><strong>How is the relationship built?</strong></p>
-    <p>Tables should be connected in a way where the Comment table has a column to store the primary key of the Post. That's how we design the logical schema, right? I have named the column "post_id" in this case. You may remember ER diagrams for this.</p>he child entity (Address), we just need to link the name of the property mapped in the User entity.</p>
-    <p>The "@JsonIgnore" annotation was placed on the user property since I do not need the user object to be visible in Address data. This prevents circular reference issues in JSON serialization.</p>
-    <p>This way we can have a bi-directional one-to-one mapping! 💪</p>User and Address entities. Any User has an address here. Two users cannot have the same Address!</p>
-    
-    <p>I don't want the Address record without the relevant User. I think this is the most common scenario. In a one-to-one mapping, both entities are tightly coupled. After the User is removed, we cannot use his/her Address. So I will define CascadeType as ALL (If you want to keep the Address, change it to PERSIST, then the address won't be deleted even if we delete the user). Since Hibernate decides FetchType for one-to-one mapping is EAGER by default, I don't need to mention it explicitly.</p>
-    
-    <p><strong>How is the relationship built?</strong></p>
-    <p>Normally we record the child entity primary key as the foreign key of the owner entity. So User should have a column in the table to record the address ID. I have given its name as "address_id" and it's referenced by the "id" column in the Address entity.</p>rong></p>
-    <p>If we have a relationship between a university and students, when university data is fetched, we don't want to fetch all students immediately, right? Because one university will have thousands of students in the students array in the mapping. It will be a very costly operation. So, we can tell Hibernate to keep it with LAZY initialization.</p>
-    <p>We can decide how to handle that later...</p>ally enhances the codebase with more reusability and maintainability. We can link Java objects using a few annotations straightforwardly. According to the rules we specify, data will be saved in the database tables.</p>
-    
-    <div class="highlight">
-        <p><strong>📂 Source Code:</strong> You can find the complete source code here: <a href="https://github.com/SalithaUCSC/spring-boot-orm" target="_blank">GitHub Repository</a></p>
-        <p><strong>📦 Dependencies:</strong> All dependencies used are available here: <a href="https://github.com/SalithaUCSC/spring-boot-orm/blob/main/pom.xml" target="_blank">pom.xml</a></p>
-    </div>
-    
-    <p>I will be using a Spring Boot application with H2 in-memory database to demonstrate the relationships practically.</p>
-    <p>Let's start with some basics... 😎</p>2>Let's Deal with Object Relationships</h2>   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn Object Relational Mapping with Spring Boot, JPA and Hibernate. Understand One-to-One, One-to-Many, and Many-to-Many relationships with practical examples.">
+     <meta name="description" content="Learn Object Relational Mapping with Spring Boot, JPA and Hibernate. Understand One-to-One, One-to-Many, and Many-to-Many relationships with practical examples.">
     <meta name="keywords" content="Spring Boot, JPA, Hibernate, ORM, Object Relational Mapping, Java, Database, Relationships">
     <meta name="author" content="Rafiq">
     <title>Object Relational Mapping with Spring Boot, JPA and Hibernate</title>
@@ -102,7 +67,6 @@
         <a href="../blog.html">&larr; Back to Blog</a>
     </nav>
     <h1>Object Relational Mapping with Spring Boot, JPA and Hibernate</h1>
-    <p>7 min read &bull; Sep 20, 2022</p>
     <h2>Let’s deal with object relationships</h2>
     <p>Since you know about the Spring Boot framework, you may have used JPA and Hibernate when working with relational databases like MySQL or PostgreSQL. Hibernate ORM is an object–relational mapping tool for the Java programming language. It provides a framework for mapping an object-oriented domain model to a relational database. In simpler terms, we can map Java objects to database tables! Hibernate is the default implementation of the JPA specification in Spring Boot.</p>
     <p>This framework magically enhances the codebase with more reusability and maintainability. We can link just Java objects using few annotations straightforward. According to the rules we specify, then data will be saved in the database tables.</p>
