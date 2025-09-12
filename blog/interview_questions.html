@@ -37,7 +37,7 @@
         <ul>
             <li>Define multiple <code>DataSource</code> beans for each database.</li>
             <li>Use <code>@Primary</code> to specify the default data source if needed.</li>
-            <li>Configure <code>PlatformTransactionManager</code> for each data source.</   li>
+            <li>Configure <code>PlatformTransactionManager</code> for each data source.</ li>
             <li>Use <code>@Transactional</code> annotation with the appropriate transaction manager for
                 methods that require transactions.</li>
         </ul>
@@ -77,18 +77,89 @@
         <h3>How Does Spring Boot's Auto-Configuration Work Under the Hood?</h3>
         <p>Spring Boot's auto-configuration works by using a combination of <code>@EnableAutoConfiguration</code> and
             <code>spring.factories</code> files. When the application starts, Spring Boot scans the classpath for
-            available libraries and configurations.</p>
+            available libraries and configurations.
+        </p>
         <p>Based on the detected libraries, Spring Boot automatically configures beans and settings that are
             commonly used with those libraries. This is done through conditional annotations like
-            <code>@ConditionalOnClass</code> and <code>@ConditionalOnMissingBean</code>.</p>
+            <code>@ConditionalOnClass</code> and <code>@ConditionalOnMissingBean</code>.
+        </p>
         <p>This mechanism allows developers to get started quickly without needing to manually configure every aspect
             of their application.</p>
-            
 
+        <h3>What is the Difference Between Monolithic and Microservices Architecture?</h3>
+        <p>The main differences between monolithic and microservices architecture are:</p>
+        <ul>
+            <li><strong>Monolithic Architecture:</strong> The entire application is built as a single, unified unit.
+                All components are tightly coupled, making it easier to develop initially but harder to scale and
+                maintain over time.</li>
+            <li><strong>Microservices Architecture:</strong> The application is divided into smaller, independent
+                services that communicate over APIs. This allows for greater flexibility, scalability, and easier
+                maintenance, but can introduce complexity in terms of service management and communication.</li>
+        </ul>
+        <p>In summary, monolithic architecture is simpler to start with, while microservices offer more long-term
+            benefits for complex applications.</p>
+
+        <h3>What Are CDN and Edge Caching?</h3>
+        <p>Content Delivery Network (CDN) is a system of distributed servers that deliver web content to users based on
+            their geographic location. CDNs help reduce latency and improve load times by caching content closer to the
+            user.</p>
+        <p>Edge caching is a technique used in CDNs where content is cached at the edge servers, which are located
+            closer to the end-users. This further reduces latency and speeds up content delivery.</p>
+
+        <p>Both CDN and edge caching are essential for optimizing web performance and enhancing user experience.</p>
+        <p><b>Content Delivery Network (CDN):</b>
+            A global network of servers that delivers web content (images, videos, scripts, etc.) from locations closest
+            to the user.
+        </p>
+        <p><b>Edge Caching:</b>
+            Storing copies of your content on “edge servers” near end-users so they get it faster, without waiting for
+            your main server.
+        </p>
+
+        <h4>How Do They Give Users ‘Free Speed’?</h4>
+        <table>
+            <tr>
+                <th>Feature</th>
+                <th>How It Works</th>
+                <th>User Benefit</th>
+            </tr>
+            <tr>
+                <td>Geographic Proximity</td>
+                <td>Content served from a local server, not a distant origin.</td>
+                <td>Faster load times</td>
+            </tr>
+            <tr>
+                <td>Reduced Latency</td>
+                <td>Data travels a shorter distance.</td>
+                <td>Quicker responses</td>
+            </tr>
+            <tr>
+                <td>Offload Origin Server</td>
+                <td>Edge caches handle most repeat requests.</td>
+                <td>Less downtime/slowness</td>
+            </tr>
+            <tr>
+                <td>Scalability</td>
+                <td>Handles traffic spikes better.</td>
+                <td>Consistent performance</td>
+            </tr>
+            <tr>
+                <td>Automatic Optimization</td>
+                <td>Many CDNs compress images/files and optimize delivery.</td>
+                <td>Smooth experience</td>
+            </tr>
+        </table>
+        <p>By using CDNs and edge caching, users experience faster load times, reduced latency, and a more reliable
+            connection to web content, effectively giving them 'free speed'.</p>
+
+        <h4>Example (How a CDN Improves Speed)</h4>
+        <p>User in Dhaka visits your site.</p>
+        <p>Instead of fetching images from a US server, they’re loaded from a CDN server in Bangladesh or close by.</p>
+        <p>Result: Webpage loads dramatically faster!</p>
     </main>
 
     <footer>
-        &copy; 2025 Md. Your Name
+        &copy; 2025 Md. Rafiq
     </footer>
 </body>
 
