@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>RabbitMQ Basic</title>
+    <link rel="stylesheet" href="../style.css" />
+</head>
+
+<body>
+    <header>
+        <h1>RabbitMQ Acknowledge Mode</h1>
+        <p><em>Published: November 2025</em></p>
+    </header>
+
+    <nav>
+        <a href="../blog.html">&larr; Back to Blog</a>
+    </nav>
+
+    <main>
+        <section>
+            <h2>AcknowledgeMode.AUTO or AcknowledgeMode.MANUAL</h2>
+            
+            <article>
+                <h3>AcknowledgeMode.AUTO (Most common in production)</h3>
+                <p>Spring handles acknowledgment automatically:</p>
+                
+                <ul>
+                    <li>✔ ACK is sent only after your <code>@RabbitListener</code> method finishes successfully</li>
+                    <li>✔ If your code throws an exception → message is NACKed + requeued or sent to DLQ</li>
+                    <li>✔ Protects from message loss</li>
+                    <li>✔ Perfect for microservices and business events</li>
+                    <li>✔ Minimal code, but still reliable</li>
+                </ul>
+
+                <p>This is the default behavior in Spring Boot—no special config needed.</p>
+
+                <h4>🟩 1A. Real-world use cases for AUTO</h4>
+                <table border="1" cellpadding="10" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Example</th>
+                            <th>Why AUTO works well</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Order created event</td>
+                            <td>If consumer fails → retry safely</td>
+                        </tr>
+                        <tr>
+                            <td>Email notification service</td>
+                            <td>Failed sends → DLQ</td>
+                        </tr>
+                        <tr>
+                            <td>Inventory update microservice</td>
+                            <td>Spring handles NACK automatically</td>
+                        </tr>
+                        <tr>
+                            <td>Billing receipt processor</td>
+                            <td>Reliable, no custom retry logic needed</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>🟦 1B. Spring Boot Example (AcknowledgeMode.AUTO)</h4>
+                <p>👉 No manual ACK required<br>
+                   👉 Throwing exception triggers Spring to NACK the message</p>
+                
+                <pre><code>@Service
+public class AutoAckConsumer {
+
+    @RabbitListener(queues = "order.queue") // AUTO is default
+    public void handleOrder(String message) {
+        System.out.println("Received order: " + message);
+
+        if (message.contains("fail")) {
+            throw new RuntimeException("Processing failed!");
+        }
+
+        // If this method completes normally → Spring automatically sends ACK
+    }
+}</code></pre>
+
+                <p><strong>Behavior:</strong></p>
+                <ul>
+                    <li>If message = "order123" → Spring ACKs it</li>
+                    <li>If message = "order-fail" → Spring automatically NACKs + requeues (or DLQs)</li>
+                </ul>
+                <p>You get reliability without extra code.</p>
+            </article>
+
+            <article>
+                <h3>🟥 2. AcknowledgeMode.MANUAL (Used for high-control systems)</h3>
+                <p>The consumer is responsible for <code>basicAck</code>, <code>basicNack</code>, <code>basicReject</code>.</p>
+
+                <ul>
+                    <li>✔ Gives full control</li>
+                    <li>✔ Prevents infinite retry loops</li>
+                    <li>✔ Allows partial batch processing</li>
+                    <li>✔ Needed when you want EXACT retry logic (e.g., retry 5 times then DLQ)</li>
+                    <li>✔ Common in financial, billing, inventory, and high-volume pipelines</li>
+                </ul>
+
+                <h4>🟩 2A. Real-world use cases for MANUAL</h4>
+                <table border="1" cellpadding="10" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Example</th>
+                            <th>Why MANUAL is needed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Payment processing</td>
+                            <td>Never retry indefinitely</td>
+                        </tr>
+                        <tr>
+                            <td>Stock trading messages</td>
+                            <td>Strict handling, manual control</td>
+                        </tr>
+                        <tr>
+                            <td>Inventory sync jobs</td>
+                            <td>Batch-level ACKs</td>
+                        </tr>
+                        <tr>
+                            <td>Fraud detection pipeline</td>
+                            <td>Custom DLQ logic</td>
+                        </tr>
+                        <tr>
+                            <td>High-volume log ingestion</td>
+                            <td>Manual backpressure control</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>🟥 2B. Spring Boot Example (AcknowledgeMode.MANUAL)</h4>
+                <p><strong>Step 1 — Configure listener factory</strong></p>
+                <pre><code>@Configuration
+public class RabbitConfig {
+
+    @Bean
+    public SimpleRabbitListenerContainerFactory manualAckFactory(ConnectionFactory connectionFactory) {
+        SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setAcknowledgeMode(AcknowledgeMode.MANUAL);
+        return factory;
+    }
+}</code></pre>
+
+                <p><strong>Step 2 — Manual ack consumer</strong></p>
+                <pre><code>@Service
+public class ManualAckConsumer {
+
+    @RabbitListener(queues = "payment.queue", containerFactory = "manualAckFactory")
+    public void handlePayment(Message message, Channel channel) throws Exception {
+
+        long tag = message.getMessageProperties().getDeliveryTag();
+        String body = new String(message.getBody());
+
+        System.out.println("Processing payment: " + body);
+
+        try {
+            // Simulate failure
+            if (body.contains("fail")) {
+                throw new RuntimeException("Payment error");
+            }
+
+            // SUCCESS → ACK
+            channel.basicAck(tag, false);
+            System.out.println("ACK sent");
+
+        } catch (Exception e) {
+
+            // FAILURE → send to DLQ manually (example)
+            System.out.println("Sending to DLQ: " + body);
+            channel.basicReject(tag, false); // false means: do NOT requeue
+        }
+    }
+}</code></pre>
+
+                <p><strong>Behavior:</strong></p>
+                <ul>
+                    <li>Success → ACK</li>
+                    <li>Failure → manually REJECT to DLQ</li>
+                    <li>No infinite retry loops</li>
+                    <li>No accidental reprocessing</li>
+                </ul>
+                <p>This is the pattern used in serious enterprise systems.</p>
+            </article>
+
+            <article>
+                <h3>🟦 Summary: Which one to use?</h3>
+                <table border="1" cellpadding="10" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>AUTO</th>
+                            <th>MANUAL</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Most common</td>
+                            <td>⭐⭐⭐⭐⭐</td>
+                            <td>⭐⭐⭐</td>
+                        </tr>
+                        <tr>
+                            <td>Safe & reliable</td>
+                            <td>✔</td>
+                            <td>✔</td>
+                        </tr>
+                        <tr>
+                            <td>Automatic retries</td>
+                            <td>✔</td>
+                            <td>You implement yourself</td>
+                        </tr>
+                        <tr>
+                            <td>DLQ support</td>
+                            <td>✔</td>
+                            <td>✔</td>
+                        </tr>
+                        <tr>
+                            <td>Avoid infinite retry loops</td>
+                            <td>❌</td>
+                            <td>✔</td>
+                        </tr>
+                        <tr>
+                            <td>Developer control</td>
+                            <td>Limited</td>
+                            <td>Full</td>
+                        </tr>
+                        <tr>
+                            <td>Batch processing</td>
+                            <td>❌</td>
+                            <td>✔</td>
+                        </tr>
+                        <tr>
+                            <td>Financial, payment systems</td>
+                            <td>Maybe</td>
+                            <td>✔✔✔</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>🧠 Final Recommendation</h3>
+                <div>
+                    <h4>✔ Use AcknowledgeMode.AUTO</h4>
+                    <p>For typical microservices that need safe processing with minimal code.</p>
+
+                    <h4>✔ Use AcknowledgeMode.MANUAL</h4>
+                    <p>For mission-critical, high-volume, or financial systems needing strict control over retries and acknowledgments.</p>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Md. Rafiul Islam
+    </footer>
+</body>
+
+</html>
