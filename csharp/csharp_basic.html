@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C# ASP.NET Core Project Explanation</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+    <header>
+        <h1>C# ASP.NET Core Project Explanation</h1>
+        <p><em>Published: November 2025</em></p>
+    </header>
+
+    <nav>
+        <a href="../index.html">&larr; Back to Home</a>
+    </nav>
+
+    <main>
+        <section>
+            <p>This is a minimal API ASP.NET Core web application using .NET 9.0. Here's what each component does:</p>
+
+            <article>
+                <h2>Project Structure</h2>
+
+                <h3>Program.cs: Entry point with minimal API setup</h3>
+                <ul>
+                    <li><code>WebApplication.CreateBuilder(args)</code> - Creates and configures the web host</li>
+                    <li><code>builder.Build()</code> - Builds the application</li>
+                    <li><code>app.MapGet("/", () => "Hello World!")</code> - Defines a GET endpoint at root that returns "Hello World!"</li>
+                    <li><code>app.Run()</code> - Starts the web server</li>
+                </ul>
+
+                <h3>FirstCSharpAPP.csproj: Project configuration file</h3>
+                <ul>
+                    <li>Target framework: .NET 9.0</li>
+                    <li>SDK: Microsoft.NET.Sdk.Web (web application SDK)</li>
+                    <li>Implicit usings enabled (common namespaces auto-imported)</li>
+                </ul>
+
+                <h3>appsettings.json: Application configuration</h3>
+                <ul>
+                    <li>Logging levels configuration</li>
+                    <li>Host configuration</li>
+                </ul>
+
+                <h3>launchSettings.json: Development environment settings</h3>
+                <ul>
+                    <li>HTTP runs on port 5296</li>
+                    <li>HTTPS runs on port 7159</li>
+                </ul>
+            </article>
+
+            <article>
+                <h2>Comparison with Java Spring Boot</h2>
+                <table border="1" cellpadding="10" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Aspect</th>
+                            <th>ASP.NET Core (C#)</th>
+                            <th>Java Spring Boot</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Entry Point</td>
+                            <td>Program.cs with top-level statements</td>
+                            <td>@SpringBootApplication class with main() method</td>
+                        </tr>
+                        <tr>
+                            <td>Minimal API</td>
+                            <td>Built-in, uses lambda expressions directly in Program.cs</td>
+                            <td>Requires @RestController or functional endpoints</td>
+                        </tr>
+                        <tr>
+                            <td>Configuration</td>
+                            <td>WebApplicationBuilder with fluent API</td>
+                            <td>SpringApplication.run() with annotations</td>
+                        </tr>
+                        <tr>
+                            <td>Dependency Injection</td>
+                            <td>Built-in DI container</td>
+                            <td>Built-in DI with @Autowired, @Component, etc.</td>
+                        </tr>
+                        <tr>
+                            <td>Project File</td>
+                            <td>.csproj (XML-based MSBuild)</td>
+                            <td>pom.xml (Maven) or build.gradle (Gradle)</td>
+                        </tr>
+                        <tr>
+                            <td>Settings</td>
+                            <td>appsettings.json</td>
+                            <td>application.properties or application.yml</td>
+                        </tr>
+                        <tr>
+                            <td>Routing</td>
+                            <td>app.MapGet(), app.MapPost(), etc.</td>
+                            <td>@GetMapping, @PostMapping annotations</td>
+                        </tr>
+                        <tr>
+                            <td>Development Server</td>
+                            <td>Kestrel (cross-platform)</td>
+                            <td>Embedded Tomcat/Jetty/Undertow</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </article>
+
+            <article>
+                <h2>Code Comparison</h2>
+
+                <h3>ASP.NET Core Minimal API:</h3>
+                <pre><code>var builder = WebApplication.CreateBuilder(args);
+var app = builder.Build();
+app.MapGet("/", () => "Hello World!");
+app.Run();</code></pre>
+
+                <h3>Spring Boot Equivalent:</h3>
+                <pre><code>@SpringBootApplication
+@RestController
+public class Application {
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
+    
+    @GetMapping("/")
+    public String hello() {
+        return "Hello World!";
+    }
+}</code></pre>
+            </article>
+
+            <article>
+                <h2>Key Differences</h2>
+                <ul>
+                    <li><strong>Verbosity:</strong> ASP.NET Core minimal APIs are more concise (6 lines vs ~10 lines)</li>
+                    <li><strong>Annotations:</strong> Spring Boot relies heavily on annotations; ASP.NET Core uses method chaining</li>
+                    <li><strong>Language Features:</strong> C# uses top-level statements and lambda expressions; Java requires explicit class structure</li>
+                    <li><strong>Philosophy:</strong> Both promote convention over configuration but with different syntactic approaches</li>
+                </ul>
+            </article>
+        </section>
+    </main>
+
+    <footer>
+        &copy; 2025 Md. Rafiul Islam
+    </footer>
+</body>
+
+</html>
